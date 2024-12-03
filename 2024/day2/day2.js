@@ -47,3 +47,31 @@ for (let arr of filteredInput) {
 }
 
 // console.log(sum)
+
+// Part Two
+
+let sumTwo = 0
+
+const checker = (arr) => {
+    let diffs = []
+    for (let i = 1; i < arr.length; i++) {
+        diffs.push(arr[i] - arr[i - 1])
+    }
+
+    const inc = diffs.every((val) => val >= 1 && val <= 3)
+    const dec = diffs.every((val) => val >= -3 && val <= -1)
+
+    return inc || dec
+}
+
+arrInput.forEach((rep) => {
+    for (let i = 0; i < rep.length; i++) {
+        const rem = [...rep.slice(0, i), ...rep.slice(i + 1)]
+        if (checker(rem)) {
+            sumTwo ++
+            break
+        }
+    }
+})
+
+console.log(sumTwo)
